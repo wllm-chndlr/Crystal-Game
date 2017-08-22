@@ -3,7 +3,7 @@
 
 <head>
   
-  <title>crystalz</title>
+  <title>shyny crystalz</title>
   
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
@@ -16,8 +16,11 @@
       color: #3d3d3d;
     }
 
+    #title {
+      font-size: 50px;
+    }
+
     .head {
-      font-size: 80px;
       text-align: right;
       padding-right: 40px;
       background: -webkit-linear-gradient(#333, #eee);
@@ -28,13 +31,10 @@
     }
 
     .crystal-image {
-/*      width: 250px;
-      height: 250px;*/
       width: 25%;
       height: 25%;
       margin-bottom: 20px;
       background-color: #3d3d3d;
-      /*box-shadow: 5px 5px 5px #888888;*/
     }
 
     #crystals {
@@ -54,78 +54,47 @@
 
   <div class="container">
 
-    <div class="jumbotron">
-    <h1 class="head">crystalz</h1>
-    </div>
-  
-    <div class="row">
-      <div class="col-md-12">
-        <h1>
-        number to guess: <span id="number-to-guess"></span>
-        </h1>
-      </div>
+    <div class="page-header head">
+      <h1 id="title">shyny crystalz</h1>
     </div>
 
     <div class="row">
       <div class="col-md-12">
-        <h1>
+        <h2>
+        number to guess: <span id="number-to-guess"></span>
+        <br>
         current total: <span id="total-score"></span>
-        </h1>
+        </h2>
       </div>
     </div>
 
     <br>
-
-  <!-- <h1>
-  number to guess: <span id="number-to-guess"></span>
-  <br>
-  current total: <span id="total-score"></span>
-  </h1> -->
 
     <div class="row">
       <div class="col-md-12" id="crystals">    
       </div>
     </div>
 
-  <!--   <div id="crystals">
-  </div> -->
-
-  <!-- <div id="dialog">
-  </div> -->
-
-  <!-- <button class="dialog"></button> -->
-
     <div class="row">
       <div class="col-md-2">
-        
         <ul class="list-group">
-          
           <li class="list-group-item list-group-item-success">
           wins: <span class="badge" id="wins"></span>
           </li>
-
           <li class="list-group-item list-group-item-danger">
           losses: <span class="badge" id="losses"></span>
           </li>
-        
         </ul>
-
       </div>
     </div>
 
-
-<!--   <h2>
-  wins: <span id="wins"></span>
-  <br>
-  losses: <span id="losses"></span>
-  </h2> -->
-
-  <div id="win-lose">
   </div>
 
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
   <script type="text/javascript">
+
+  $(document).ready(function() {
 
     var targetNumber = Math.floor(Math.random() * 101) + 19;
     var counter = 0;
@@ -158,12 +127,11 @@
       imageCrystal.attr("src", options.imageOptions[Math.floor(Math.random() *4 )]);
       imageCrystal.attr("data-crystalvalue", options.numberOptions[i]);
       $("#crystals").append(imageCrystal);
-    }
+    };
 
     function reset () {
       
       $("#crystals").empty();
-      $("#win-lose").empty();
       counter = 0;
       $("#total-score").text(counter);
       targetNumber = Math.floor(Math.random() * 101) + 19;
@@ -192,37 +160,7 @@
         $("#crystals").append(imageCrystal);
       }
 
-      $(".crystal-image").on("click", function() {
-
-      var crystalValue = ($(this).attr("data-crystalvalue"));
-
-      crystalValue = parseInt(crystalValue);
-
-      counter += crystalValue;
-
-      $("#total-score").text(counter);
-
-      if (counter === targetNumber) {
-        // $("#total-score").text(counter);
-        wins++;
-        alert("you rock!");
-        $("#wins").html(wins);
-        reset();
-      }
-
-      else if (counter > targetNumber) {
-        // $("#total-score").text(counter);
-        losses++;
-        alert("you lose!!");
-        $("#losses").html(losses);
-        reset();
-      }
-      
-      });
-
     };
-
-
 
     $(".crystal-image").on("click", function() {
 
@@ -236,7 +174,6 @@
 
       if (counter === targetNumber) {
         $("#total-score").text(counter);
-        // $(".win-lose").html("You rock!").delay(5000);
         wins++;
         alert("you rock!");
         $("#wins").html(wins);
@@ -245,7 +182,6 @@
 
       else if (counter > targetNumber) {
         $("#total-score").text(counter);
-        // $(".win-lose").html("You lose!").delay(5000);
         losses++;
         alert("you lose!!");
         $("#losses").html(losses);
@@ -254,6 +190,7 @@
 
     });
       
+  });
   
   </script>
 
