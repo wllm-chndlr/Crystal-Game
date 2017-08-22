@@ -3,32 +3,43 @@
 
 <head>
   
-  <title>crystalzzz</title>
+  <title>crystalz</title>
   
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
 
   <style type="text/css">
 
     body {
       font-family: 'Roboto Slab', serif;
       color: #3d3d3d;
-      padding-left: 40px;
     }
 
-    header {
+    .head {
       font-size: 80px;
       text-align: right;
       padding-right: 40px;
+      background: -webkit-linear-gradient(#333, #eee);
+      background: -o-linear-gradient(#333, #eee);
+      background: linear-gradient(#333, #eee);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
     .crystal-image {
-      width: 250px;
-      height: 250px;
-      margin-right: 20px;
+/*      width: 250px;
+      height: 250px;*/
+      width: 25%;
+      height: 25%;
       margin-bottom: 20px;
-
       background-color: #3d3d3d;
-      box-shadow: 5px 5px 5px #888888;
+      /*box-shadow: 5px 5px 5px #888888;*/
+    }
+
+    #crystals {
+      width: 100%;
+      margin: auto;
     }
 
     img:hover {
@@ -41,19 +52,76 @@
 
 <body>
 
-  <header>crystalzzz</header>
+  <div class="container">
 
-  <h1>
+    <div class="jumbotron">
+    <h1 class="head">crystalz</h1>
+    </div>
+  
+    <div class="row">
+      <div class="col-md-12">
+        <h1>
+        number to guess: <span id="number-to-guess"></span>
+        </h1>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <h1>
+        current total: <span id="total-score"></span>
+        </h1>
+      </div>
+    </div>
+
+    <br>
+
+  <!-- <h1>
   number to guess: <span id="number-to-guess"></span>
-  </h1>
+  <br>
+  current total: <span id="total-score"></span>
+  </h1> -->
 
-  <div id="crystals">
-  </div>
+    <div class="row">
+      <div class="col-md-12" id="crystals">    
+      </div>
+    </div>
 
-  <h2>
-  wins: <span id="wins"></span><br>
+  <!--   <div id="crystals">
+  </div> -->
+
+  <!-- <div id="dialog">
+  </div> -->
+
+  <!-- <button class="dialog"></button> -->
+
+    <div class="row">
+      <div class="col-md-2">
+        
+        <ul class="list-group">
+          
+          <li class="list-group-item list-group-item-success">
+          wins: <span class="badge" id="wins"></span>
+          </li>
+
+          <li class="list-group-item list-group-item-danger">
+          losses: <span class="badge" id="losses"></span>
+          </li>
+        
+        </ul>
+
+      </div>
+    </div>
+
+
+<!--   <h2>
+  wins: <span id="wins"></span>
+  <br>
   losses: <span id="losses"></span>
-  </h2>
+  </h2> -->
+
+  <div id="win-lose">
+  </div>
 
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
@@ -65,22 +133,9 @@
     var losses = 0;
 
     $("#number-to-guess").text(targetNumber);
+    $("#total-score").text(counter);
     $("#wins").html(wins);
     $("#losses").html(losses);
-
-    // var numberOptions = [
-    // (Math.floor(Math.random() * 12) + 1), 
-    // (Math.floor(Math.random() * 12) + 1), 
-    // (Math.floor(Math.random() * 12) + 1), 
-    // (Math.floor(Math.random() * 12) + 1)
-    // ];
-
-    // var imageOptions = [
-    //   assets/images/purple.jpg,
-    //   assets/images/orange.jpg,
-    //   assets/images/blue.jpg,
-    //   assets/images/green.jpg
-    // ];
 
     var options = {
       imageOptions: [
@@ -108,14 +163,13 @@
     function reset () {
       
       $("#crystals").empty();
-
+      $("#win-lose").empty();
       counter = 0;
-
+      $("#total-score").text(counter);
       targetNumber = Math.floor(Math.random() * 101) + 19;
-
       $("#number-to-guess").text(targetNumber);
 
-      var options = {
+      options = {
         imageOptions: [
           "assets/images/purple.jpg",
           "assets/images/orange.jpg",
@@ -146,17 +200,21 @@
 
       counter += crystalValue;
 
-      alert("new score: " + counter);
+      $("#total-score").text(counter);
 
       if (counter === targetNumber) {
+        // $("#total-score").text(counter);
+        wins++;
         alert("you rock!");
-        $("#wins").html(wins++)
+        $("#wins").html(wins);
         reset();
       }
 
       else if (counter > targetNumber) {
+        // $("#total-score").text(counter);
+        losses++;
         alert("you lose!!");
-        $("#losses").html(losses++)
+        $("#losses").html(losses);
         reset();
       }
       
@@ -164,31 +222,42 @@
 
     };
 
-      $(".crystal-image").on("click", function() {
 
-        var crystalValue = ($(this).attr("data-crystalvalue"));
 
-        crystalValue = parseInt(crystalValue);
+    $(".crystal-image").on("click", function() {
 
-        counter += crystalValue;
+      var crystalValue = ($(this).attr("data-crystalvalue"));
 
-        alert("new score: " + counter);
+      crystalValue = parseInt(crystalValue);
 
-        if (counter === targetNumber) {
-          alert("you rock!");
-          $("#wins").html(wins++)
-          reset();
-        }
+      counter += crystalValue;
 
-        else if (counter > targetNumber) {
-          alert("you lose!!");
-          $("#losses").html(losses++)
-          reset();
-        }
-        
-      });
+      $("#total-score").text(counter);
+
+      if (counter === targetNumber) {
+        $("#total-score").text(counter);
+        // $(".win-lose").html("You rock!").delay(5000);
+        wins++;
+        alert("you rock!");
+        $("#wins").html(wins);
+        reset();
+      }
+
+      else if (counter > targetNumber) {
+        $("#total-score").text(counter);
+        // $(".win-lose").html("You lose!").delay(5000);
+        losses++;
+        alert("you lose!!");
+        $("#losses").html(losses);
+        reset();
+      }
+
+    });
+      
   
   </script>
+
+  </div>
 
 </body>
 
