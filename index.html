@@ -7,43 +7,111 @@
   
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
+  <link rel="stylesheet" type="text/css" href="assets/css/sweetalert.css"><link rel="stylesheet" type="text/css" href="assets/css/sweetalert.css">
 
   <style type="text/css">
+
+    html {
+      background: url(assets/images/forest.jpg) no-repeat center center fixed; 
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+    }
 
     body {
       font-family: 'Roboto Slab', serif;
       color: #3d3d3d;
+      background-color: transparent;
+      /*background-color: #424242;*/
     }
 
     #title {
-      font-size: 50px;
+      font-size: 100px;
+      margin-top: 10px;
     }
 
     .head {
-      text-align: right;
-      padding-right: 40px;
-      background: -webkit-linear-gradient(#333, #eee);
-      background: -o-linear-gradient(#333, #eee);
-      background: linear-gradient(#333, #eee);
+      text-align: center;
+      background: -webkit-linear-gradient(#5b5b5b, #eee);
+      background: -o-linear-gradient(#5b5b5b, #eee);
+      background: linear-gradient(#5b5b5b, #eee);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
-    .crystal-image {
-      width: 25%;
-      height: 25%;
-      margin-bottom: 20px;
-      background-color: #3d3d3d;
+    div.page-header.head {
+      margin-bottom: 40px;
+      margin-top: 0px;
     }
 
-    #crystals {
-      width: 100%;
-      margin: auto;
+    .crystal-image {
+      width: 22%;
+      height: 22%;
+      margin-left: 4%;
+      margin-bottom: 20px;
+      background-color: #3d3d3d;
+      border: 2px #eee solid;
+    }
+
+    .crystal-image:after {
+
+    }
+
+    .crystal-image:first-child {
+      margin-left: 0px;
+    }
+
+    .list-group-item {
+      height: 80px;
+      color: #fff;
+      font-size: 25px;
+      background-color: #5b5b5b;
+      opacity: 0.85;
+      margin-bottom: 20px;
+    }
+
+    .list-group-item:last-child {
+      margin-bottom: 40px;
+    }
+
+    .badge {
+      font-size: 40px;
+      color: #5b5b5b;
+      background-color: #fff;
+    }
+
+    #TN {
+      color: #91629b;
+      /*background-color: #91629b;*/
+    }
+
+    #CT {
+      color: #5c7fef;
+      margin-bottom: 10px;
+      /*background-color: #75ae77;*/
+    }
+
+    #W {
+      color: #75ae77;
+      /*background-color: #d68402;*/
+    }
+
+    #L {
+      color: #d68402;
+      /*background-color: #5c7fef;*/
+    }
+
+    h2 {
+      color: #dbdbdb;
     }
 
     img:hover {
       opacity: 0.8;
+    }
+
+    button {
+      background-color: #d68402;
     }
 
   </style>
@@ -59,13 +127,24 @@
     </div>
 
     <div class="row">
-      <div class="col-md-12">
-        <h2>
-        number to guess: <span id="number-to-guess"></span>
-        <br>
-        current total: <span id="total-score"></span>
-        </h2>
+
+      <div class="col-md-3">
       </div>
+
+      <div class="col-md-6">
+        <ul class="list-group">
+          <li class="list-group-item" id="TN">
+          TARGET NUMBER <span class="badge" id="number-to-guess"></span>
+          </li>
+          <li class="list-group-item" id="CT">
+          CURRENT TOTAL <span class="badge" id="total-score"></span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-md-3">
+      </div>
+
     </div>
 
     <br>
@@ -75,21 +154,35 @@
       </div>
     </div>
 
+    <br>
+
     <div class="row">
-      <div class="col-md-2">
-        <ul class="list-group">
-          <li class="list-group-item list-group-item-success">
-          wins: <span class="badge" id="wins"></span>
-          </li>
-          <li class="list-group-item list-group-item-danger">
-          losses: <span class="badge" id="losses"></span>
+      
+      <div class="col-md-3">
+      </div>
+
+      <div class="col-md-3">
+          <li class="list-group-item" id="W">
+          WINS <span class="badge" id="wins"></span>
           </li>
         </ul>
       </div>
+
+      <div class="col-md-3">
+          <li class="list-group-item" id="L">
+          LOSSES <span class="badge" id="losses"></span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-md-3">
+      </div>
+
     </div>
 
   </div>
-
+  
+  <script src="assets/javascript/sweetalert.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
   <script type="text/javascript">
@@ -132,6 +225,7 @@
     function reset () {
       
       $("#crystals").empty();
+      $("#win-lose").empty();
       counter = 0;
       $("#total-score").text(counter);
       targetNumber = Math.floor(Math.random() * 101) + 19;
@@ -162,7 +256,8 @@
 
     };
 
-    $(".crystal-image").on("click", function() {
+    // $(".crystal-image").on("click", function() {
+      $(document).on("click", ".crystal-image", function() {
 
       var crystalValue = ($(this).attr("data-crystalvalue"));
 
@@ -173,17 +268,25 @@
       $("#total-score").text(counter);
 
       if (counter === targetNumber) {
-        $("#total-score").text(counter);
+        swal({
+          title: "You rock!",
+          text: "(I will close in 2 seconds)",
+          timer: 2000,
+          showConfirmButton: false
+        });
         wins++;
-        alert("you rock!");
         $("#wins").html(wins);
         reset();
       }
 
       else if (counter > targetNumber) {
-        $("#total-score").text(counter);
+        swal({
+          title: "You lose!",
+          text: "(I will close in 2 seconds)",
+          timer: 2000,
+          showConfirmButton: false
+        });
         losses++;
-        alert("you lose!!");
         $("#losses").html(losses);
         reset();
       }

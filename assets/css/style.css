@@ -1,0 +1,94 @@
+    html { 
+      background: url(assets/images/forest.jpg) no-repeat center center fixed; 
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+    }
+
+    body {
+      font-family: 'Roboto Slab', serif;
+      color: #3d3d3d;
+      background-color: transparent;
+      /*background-color: #424242;*/
+    }
+
+    #title {
+      font-size: 100px;
+    }
+
+    .head {
+      text-align: center;
+      background: -webkit-linear-gradient(#5b5b5b, #eee);
+      background: -o-linear-gradient(#5b5b5b, #eee);
+      background: linear-gradient(#5b5b5b, #eee);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    div.page-header.head {
+      margin-bottom: 40px;
+    }
+
+    .crystal-image {
+      width: 22%;
+      height: 22%;
+      margin-left: 4%;
+      margin-bottom: 20px;
+      background-color: #3d3d3d;
+      border: 2px #eee solid;
+    }
+
+    .crystal-image:first-child {
+      margin-left: 0px;
+    }
+
+    .list-group-item {
+      height: 80px;
+      color: #fff;
+      font-size: 25px;
+      background-color: #5b5b5b;
+      opacity: 0.85;
+    }
+
+    .badge {
+      font-size: 40px;
+      color: #5b5b5b;
+      background-color: #fff;
+    }
+
+    #TN {
+      color: #91629b;
+      /*background-color: #91629b;*/
+    }
+
+    #CT {
+      color: #5c7fef;
+      /*background-color: #75ae77;*/
+    }
+
+    #W {
+      color: #75ae77;
+      /*background-color: #d68402;*/
+    }
+
+    #L {
+      color: #d68402;
+      /*background-color: #5c7fef;*/
+    }
+
+    h2 {
+      background: -webkit-linear-gradient(#f16800, #eee);
+      background: -o-linear-gradient(#f16800, #eee);
+      background: linear-gradient(#f16800, #eee);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    img:hover {
+      opacity: 0.8;
+    }
+
+    button {
+      background-color: #d68402;
+    }
