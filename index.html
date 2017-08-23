@@ -23,7 +23,6 @@
       font-family: 'Roboto Slab', serif;
       color: #3d3d3d;
       background-color: transparent;
-      /*background-color: #424242;*/
     }
 
     #title {
@@ -51,11 +50,12 @@
       margin-left: 4%;
       margin-bottom: 20px;
       background-color: #3d3d3d;
-      border: 2px #eee solid;
+      border: 1px #eee solid;
+      border-radius: 3px;
     }
 
-    .crystal-image:after {
-
+    .crystal-image:active {
+      transform: translate(2px, 2px);
     }
 
     .crystal-image:first-child {
@@ -66,8 +66,9 @@
       height: 80px;
       color: #fff;
       font-size: 25px;
-      background-color: #5b5b5b;
-      opacity: 0.85;
+      background-color: rgb(81, 81, 81);
+      background-color: rgba(81, 81, 81, 0.8);
+      /*opacity: 0.75;*/
       margin-bottom: 20px;
     }
 
@@ -82,12 +83,13 @@
     }
 
     #TN {
-      color: #91629b;
+      color: #5c7fef;
+      margin-bottom: 10px;
       /*background-color: #91629b;*/
     }
 
     #CT {
-      color: #5c7fef;
+      color: #945c98;
       margin-bottom: 10px;
       /*background-color: #75ae77;*/
     }
@@ -136,6 +138,21 @@
           <li class="list-group-item" id="TN">
           TARGET NUMBER <span class="badge" id="number-to-guess"></span>
           </li>
+        </ul>
+      </div>
+
+      <div class="col-md-3">
+      </div>
+
+    </div>
+
+    <div class="row">
+
+      <div class="col-md-3">
+      </div>
+
+      <div class="col-md-6">
+        <ul class="list-group">
           <li class="list-group-item" id="CT">
           CURRENT TOTAL <span class="badge" id="total-score"></span>
           </li>
@@ -270,7 +287,7 @@
       if (counter === targetNumber) {
         swal({
           title: "You rock!",
-          text: "(I will close in 2 seconds)",
+          text: "(this message will close in 2 seconds)",
           timer: 2000,
           showConfirmButton: false
         });
@@ -282,7 +299,7 @@
       else if (counter > targetNumber) {
         swal({
           title: "You lose!",
-          text: "(I will close in 2 seconds)",
+          text: "(this message will close in 2 seconds)",
           timer: 2000,
           showConfirmButton: false
         });
