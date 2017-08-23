@@ -26,7 +26,7 @@
     }
 
     #title {
-      font-size: 100px;
+      font-size: 80px;
       margin-top: 10px;
     }
 
@@ -44,6 +44,19 @@
       margin-top: 0px;
     }
 
+    .instructions {
+      text-align: center;
+      color: #fff;
+      padding-top: 27px;
+      margin-bottom: 40px;
+      opacity: 0.8;
+      cursor: pointer;
+    }
+
+    div.#crystals {
+      height: 500px;
+    }
+
     .crystal-image {
       width: 22%;
       height: 22%;
@@ -51,7 +64,8 @@
       margin-bottom: 20px;
       background-color: #3d3d3d;
       border: 1px #eee solid;
-      border-radius: 3px;
+      border-radius: 80px;
+      cursor: pointer;
     }
 
     .crystal-image:active {
@@ -62,46 +76,56 @@
       margin-left: 0px;
     }
 
+    div.#crystals {
+      max-width: 100%;
+    }
+
     .list-group-item {
       height: 80px;
       color: #fff;
       font-size: 25px;
       background-color: rgb(81, 81, 81);
       background-color: rgba(81, 81, 81, 0.8);
-      /*opacity: 0.75;*/
       margin-bottom: 20px;
+      padding-top: 15px;
     }
 
     .list-group-item:last-child {
-      margin-bottom: 40px;
+      margin-bottom: 20px;
     }
 
     .badge {
+      width: 80px;
       font-size: 40px;
       color: #5b5b5b;
-      background-color: #fff;
+      background-color: rgb(255, 255, 255);
+      background-color: rgba(255, 255, 255, 0.8);
     }
 
     #TN {
       color: #5c7fef;
       margin-bottom: 10px;
-      /*background-color: #91629b;*/
+    }
+
+    #number-to-guess {
+      color: #5c7fef;
     }
 
     #CT {
-      color: #945c98;
+      color: #a17ca8;
       margin-bottom: 10px;
-      /*background-color: #75ae77;*/
     }
 
-    #W {
+    #total-score {
+      color: #a17ca8;
+    }
+
+    #W, #wins {
       color: #75ae77;
-      /*background-color: #d68402;*/
     }
 
-    #L {
+    #L, #losses {
       color: #d68402;
-      /*background-color: #5c7fef;*/
     }
 
     h2 {
@@ -110,10 +134,6 @@
 
     img:hover {
       opacity: 0.8;
-    }
-
-    button {
-      background-color: #d68402;
     }
 
   </style>
@@ -154,7 +174,7 @@
       <div class="col-md-6">
         <ul class="list-group">
           <li class="list-group-item" id="CT">
-          CURRENT TOTAL <span class="badge" id="total-score"></span>
+          CURRENT NUMBER <span class="badge" id="total-score"></span>
           </li>
         </ul>
       </div>
@@ -179,6 +199,7 @@
       </div>
 
       <div class="col-md-3">
+        <ul class="list-group">
           <li class="list-group-item" id="W">
           WINS <span class="badge" id="wins"></span>
           </li>
@@ -186,13 +207,15 @@
       </div>
 
       <div class="col-md-3">
+        <ul class="list-group">
           <li class="list-group-item" id="L">
           LOSSES <span class="badge" id="losses"></span>
           </li>
         </ul>
       </div>
 
-      <div class="col-md-3">
+      <div class="col-md-3 instructions">
+      Click for instructions
       </div>
 
     </div>
@@ -263,18 +286,17 @@
           ]
       };
 
-      for (var i = 0; i < options.numberOptions.length; i++) {
-        imageCrystal = $("<img>");
-        imageCrystal.addClass("crystal-image");
-        imageCrystal.attr("src", options.imageOptions[Math.floor(Math.random() *4 )]);
-        imageCrystal.attr("data-crystalvalue", options.numberOptions[i]);
-        $("#crystals").append(imageCrystal);
-      }
+    for (var i = 0; i < options.numberOptions.length; i++) {
+      imageCrystal = $("<img>");
+      imageCrystal.addClass("crystal-image");
+      imageCrystal.attr("src", options.imageOptions[Math.floor(Math.random() *4 )]);
+      imageCrystal.attr("data-crystalvalue", options.numberOptions[i]);
+      $("#crystals").append(imageCrystal);
+    }
 
     };
 
-    // $(".crystal-image").on("click", function() {
-      $(document).on("click", ".crystal-image", function() {
+    $(document).on("click", ".crystal-image", function() {
 
       var crystalValue = ($(this).attr("data-crystalvalue"));
 
@@ -287,8 +309,8 @@
       if (counter === targetNumber) {
         swal({
           title: "You rock!",
-          text: "(this message will close in 2 seconds)",
-          timer: 2000,
+          text: "(this message will close in a second)",
+          timer: 1250,
           showConfirmButton: false
         });
         wins++;
@@ -299,8 +321,8 @@
       else if (counter > targetNumber) {
         swal({
           title: "You lose!",
-          text: "(this message will close in 2 seconds)",
-          timer: 2000,
+          text: "(this message will close in a second)",
+          timer: 1250,
           showConfirmButton: false
         });
         losses++;
@@ -310,6 +332,10 @@
 
     });
       
+    $(document).on("click", ".instructions", function() {
+      swal("Instructions", "Each crystal has a value, which is hidden from you. By clicking on a crystal, you will add that value to your current number. To win the game, match your current number to the target number. If you exceed the target number, you will lose the game. Each new game has a new target number and new crystal values. Good luck!")
+      });
+
   });
   
   </script>
